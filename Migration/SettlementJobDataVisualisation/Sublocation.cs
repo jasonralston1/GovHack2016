@@ -70,6 +70,7 @@ namespace SettlementJobDataVisualisation1
             marker = new GMarkerGoogle(point,
             GMarkerGoogleType.lightblue_pushpin);
             String tooltip = getBaseDetails(state);
+            tooltip += "Positions available. Click for details.\r\n\r\n";
             marker.ToolTipText = tooltip;
             markersOverlay.Markers.Add(marker);
         }
@@ -79,9 +80,6 @@ namespace SettlementJobDataVisualisation1
             String baseDetails = "State: " + state + "\r\n";
             baseDetails += "Local Government Area: " + regionName + "\r\n";
             baseDetails += "\r\n";
-
-            baseDetails += "Positions available. Click for details.\r\n\r\n";
-            
             return baseDetails;
         }
 

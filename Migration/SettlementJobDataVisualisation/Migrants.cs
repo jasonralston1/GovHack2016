@@ -135,7 +135,7 @@ namespace SettlementJobDataVisualisation1
             ageString += ageStringGen("45-54", maturer);
             ageString += ageStringGen("55-64", senior);
             ageString += ageStringGen("65+", elderly);
-            ageString += ageStringGen("unknown", unknown);
+            ageString += ageStringGen("Unknown", unknown);
           
             return ageString;
         }
