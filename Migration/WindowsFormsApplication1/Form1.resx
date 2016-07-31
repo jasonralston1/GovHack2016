@@ -203,7 +203,13 @@ Left Click on Markers for further information
 Right Click and Drag to move around the map
 
 The drop down menus on the left hand side will
-move the map to the selected state and region.</value>
+move the map to the selected state and region.
+
+Clicking on the blue pins will display Job data
+from Job Services Australia for that suburb. This
+can be matched with migrants to see where
+job oppurtunities may be lacking, or where skill
+migrants might be in high demand.</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

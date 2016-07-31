@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace SettlementDataVisualisation1
 {
     partial class Form1
     {
@@ -72,7 +72,7 @@
             this.furtherInfo.Name = "furtherInfo";
             this.furtherInfo.ReadOnly = true;
             this.furtherInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.furtherInfo.Size = new System.Drawing.Size(227, 429);
+            this.furtherInfo.Size = new System.Drawing.Size(227, 341);
             this.furtherInfo.TabIndex = 5;
             // 
             // gmap
@@ -103,8 +103,6 @@
             this.gmap.TabIndex = 6;
             this.gmap.Zoom = 5D;
             this.gmap.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gmap_OnMarkerClick);
-            
-            
             // 
             // label1
             // 
@@ -135,7 +133,6 @@
             this.status.Size = new System.Drawing.Size(173, 29);
             this.status.TabIndex = 9;
             this.status.Text = "Status: Idle";
-            
             // 
             // timer1
             // 
@@ -162,12 +159,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 589);
+            this.label4.Location = new System.Drawing.Point(6, 505);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(229, 104);
+            this.label4.Size = new System.Drawing.Size(231, 182);
             this.label4.TabIndex = 12;
             this.label4.Text = resources.GetString("label4.Text");
-            
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // Form1
             // 
@@ -187,10 +184,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Settlement Data Extract Visualisation";
+            this.Text = "Settlement and Job Data Extract Visualisation";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -9,17 +9,19 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 
-namespace WindowsFormsApplication1
+namespace SettlementDataVisualisation1
 {
     class DataPort
     {
         private States states = new States();
+        private JobLocations joblocations = new JobLocations();
         public DataPort()
         {
 
-            extractData();
+           extractSettlementData();
+           extractJobAustraliaData();
         }
-        public void extractData()
+        public void extractSettlementData()
         {
             using (TextFieldParser parser = new TextFieldParser(@"Settlement-Data-Extract-colon.csv"))
 
@@ -39,13 +41,43 @@ namespace WindowsFormsApplication1
                     String gender = fields[5];
                     String migrationStream = fields[6];
                     String ageBand = fields[7];
-                    addData(currentState, localGovernmentArea, mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
+                    addSettlementData(currentState, localGovernmentArea, mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
                 }
 
             }
+            
+        }
+
+        public void extractJobAustraliaData()
+        {
+            using (TextFieldParser parser = new TextFieldParser(@"JPO-coded2.csv"))
+
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(":");
+                parser.HasFieldsEnclosedInQuotes = false;
+                parser.ReadFields();
+                while (!parser.EndOfData)
+                { 
+                    string[] fields = parser.ReadFields();
+                    String jobarea = fields[3];
+                    String jobrole = fields[4];
+                    String region = fields[9];
+                    String state = fields[10];
+                    addJobAustraliaData(state, region, jobarea, jobrole);
+                    
+                }
+                joblocations.test();
+            }
 
         }
-        private void addData(String currentState, String localGovernmentArea, String mainLanguage, String englishProficient, String countryOfBirth, String gender, String migrationStream, String ageBand)
+        private void addJobAustraliaData(String state, String region, String jobarea, String jobrole  )
+        {
+            joblocations.addJobData(state,region,jobarea,jobrole);
+        }
+
+
+        private void addSettlementData(String currentState, String localGovernmentArea, String mainLanguage, String englishProficient, String countryOfBirth, String gender, String migrationStream, String ageBand)
         {
             states.addMigrantData(currentState, localGovernmentArea, mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
         }
@@ -57,6 +89,7 @@ namespace WindowsFormsApplication1
         public void markLocations(GMapOverlay markersOverlay, GMapControl gmap)
         {
             states.markLocations(markersOverlay, gmap);
+            joblocations.markLocations(markersOverlay, gmap);
             gmap.Overlays.Add(markersOverlay);
         }
         public List<String> getRegionsForState(String state)
@@ -67,6 +100,10 @@ namespace WindowsFormsApplication1
         public String getRegionDetails(String state, String region)
         {
             return states.getRegionDetails(state, region);
+        }
+        public String getJobDetails(String state, String region)
+        {
+            return joblocations.getDetails(state, region);
         }
     }
 }

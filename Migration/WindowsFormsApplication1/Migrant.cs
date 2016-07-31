@@ -8,7 +8,7 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 
-namespace WindowsFormsApplication1
+namespace SettlementDataVisualisation1
 {
     class Migrant
     {

@@ -15,7 +15,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Timers;
 
-namespace WindowsFormsApplication1
+namespace SettlementDataVisualisation1
 {
     public partial class Form1 : Form
     {
@@ -102,8 +102,9 @@ namespace WindowsFormsApplication1
         private void regionDropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
             String location = stateDropdown.Text + ", " + regionDropdown.Text + ", Australia";
+            gmap.Zoom = 12;
             gmap.SetPositionByKeywords(location);
-            furtherInfo.Text = dataport.getRegionDetails(stateDropdown.Text, regionDropdown.Text);
+            furtherInfo.Text = dataport.getRegionDetails(stateDropdown.Text, regionDropdown.Text);  
         }
 
         private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
@@ -118,14 +119,17 @@ namespace WindowsFormsApplication1
                 line = reader.ReadLine();
                 string[] words = Regex.Split(line, ": ");
                 String state = words[1];
-                Console.WriteLine("State: " + state);
                 line = reader.ReadLine();
-                
                 string[] words2 = Regex.Split(line, ": ");
                 String region = words2[1];
-                Console.WriteLine("Region: " + region);
 
                 furtherInfo.Text = dataport.getRegionDetails(state, region);
+
+                if (furtherInfo.Text.Equals("State not found"))
+                {
+                    
+                    furtherInfo.Text = dataport.getJobDetails(state, region);
+                }
 
             }
           
@@ -143,5 +147,9 @@ namespace WindowsFormsApplication1
             processData();
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
