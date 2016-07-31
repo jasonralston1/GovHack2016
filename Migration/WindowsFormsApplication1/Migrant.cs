@@ -27,7 +27,23 @@ namespace WindowsFormsApplication1
             gender = gender2;
             migrationStream = migrationStream2;
             ageBand = ageBand2;
+        }
+        public String getProficiency()
+        {
+            return englishProficient;
+        }
+        public String getGender()
+        {
+            return gender;
+        }
+        public String getAgeBand()
+        {
+            return ageBand;
+        }
 
+        public String getMigrationStream()
+        {
+            return migrationStream;
         }
     }
 }

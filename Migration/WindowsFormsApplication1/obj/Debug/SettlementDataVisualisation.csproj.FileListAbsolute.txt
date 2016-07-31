@@ -1,0 +1,16 @@
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation1.Properties.Resources.resources
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation.csproj.GenerateResource.Cache
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\SettlementDataVisualisation.exe.config
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\SettlementDataVisualisation.exe.manifest
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\SettlementDataVisualisation.application
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\SettlementDataVisualisation.exe
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\SettlementDataVisualisation.pdb
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\GMap.NET.Core.dll
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\GMap.NET.Core.xml
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\bin\Debug\GMap.NET.WindowsForms.xml
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation.exe.manifest
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation.application
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation.exe
+C:\Users\Jason\Desktop\govhack\visualstudio\Migration\WindowsFormsApplication1\obj\Debug\SettlementDataVisualisation.pdb

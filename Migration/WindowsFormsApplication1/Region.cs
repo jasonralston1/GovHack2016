@@ -22,17 +22,11 @@ namespace WindowsFormsApplication1
 
         public Boolean nameMatches(String regionname)
         {
-
             return name.Equals(regionname);
         }
         public void addMigrant(String mainLanguage, String englishProficient, String countryOfBirth, String gender, String migrationStream, String ageBand)
         {
            migrants.addMigrantData(mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
-        }
-        public void toString()
-        {
-            Console.WriteLine(name);
-            migrants.toString();
         }
 
         public void markLocations(GMapOverlay markersOverlay, GMapControl gmap, String state)
@@ -45,62 +39,47 @@ namespace WindowsFormsApplication1
 
             
             GMarkerGoogle marker;
-            if (migrantNumbers < 50)
+            if (migrantNumbers < 200)
             {
 
                 marker = new GMarkerGoogle(point,
               GMarkerGoogleType.green_small);
+              
             }
-            else if ((migrantNumbers >= 50) && (migrantNumbers < 200))
-            {
-              marker = new GMarkerGoogle(point,
-              GMarkerGoogleType.blue_small);
-            }
+            
             else if ((migrantNumbers >= 200) && (migrantNumbers < 500))
             {
                 marker = new GMarkerGoogle(point,
-              GMarkerGoogleType.gray_small);
+              GMarkerGoogleType.purple_small);
             }
-            else if ((migrantNumbers >= 500) && (migrantNumbers < 1000))
+            else if ((migrantNumbers >= 500) && (migrantNumbers < 2000))
             {
                 marker = new GMarkerGoogle(point,
               GMarkerGoogleType.brown_small);
             }
-            else if ((migrantNumbers >= 1000) && (migrantNumbers < 5000))
-            {
-              marker = new GMarkerGoogle(point,
-              GMarkerGoogleType.purple_small);
-            }
-            else if ((migrantNumbers >= 5000) && (migrantNumbers < 10000))
+            
+            else if ((migrantNumbers >= 2000) && (migrantNumbers < 5000))
             {
              marker = new GMarkerGoogle(point,
               GMarkerGoogleType.yellow_small);
             }
-            else if ((migrantNumbers >= 10000) && (migrantNumbers < 25000))
+            else if ((migrantNumbers >= 5000) && (migrantNumbers <= 10000))
             {
                marker = new GMarkerGoogle(point,
               GMarkerGoogleType.orange_small);
             }
-            else if ((migrantNumbers >= 25000) && (migrantNumbers < 50000))
+            else if ((migrantNumbers > 10000))
             {
                 marker = new GMarkerGoogle(point,
               GMarkerGoogleType.red_small);
             }
             else
             {
-                Console.WriteLine(name + " " + migrantNumbers);
-                marker = new GMarkerGoogle(point,
+              marker = new GMarkerGoogle(point,
               GMarkerGoogleType.black_small);
             }
-            marker.ToolTipText = "Location Name: " + location +"\n";
-            marker.ToolTipText += "Migrant Numbers: " + migrantNumbers + "\n";
-            marker.ToolTipText += "Number of English Speakers: 2\n";
-            marker.ToolTipText += "Number of males: 37000 \n";
-            marker.ToolTipText += "Number of females: 240900 \n";
-
+            marker.ToolTipText = getBaseDetails(state);
             markersOverlay.Markers.Add(marker);
-            
-
         }
         public String getName()
         {
@@ -108,13 +87,28 @@ namespace WindowsFormsApplication1
         }
         public String getRegionDetails(String state)
         {
-            String location = name + ", " + state + ", Australia";
-            String information = "Location Name: " + location + "\r\n";
+            return getDetails(state);
+        }
+        private String getBaseDetails(String state)
+        {
+            String baseDetails = "State: " + state + "\r\n";
+            baseDetails += "Local Government Area: " + name + "\r\n";
+            baseDetails += "\r\n";
             int migrantNumbers = migrants.getMigrantCount();
-            information += "Migrant Numbers: " + migrantNumbers + "\r\n";
-            information += "Number of English Speakers: 2\r\n";
-            information += "Number of males: 37000 \r\n";
-            information += "Number of females: 240900 \r\n";
+            baseDetails += "Migrant Numbers: " + migrantNumbers + "\r\n\r\n";
+            return baseDetails;
+        }
+        private String getDetails(String state)
+        {
+            String information = getBaseDetails(state);
+            information += "English Proficiency:\r\n";
+            information += migrants.getMigrantEnglishProficiency();
+            information += "Migrant Genders\r\n";
+            information += migrants.getMigrantGender();
+            information += "Migrant Age Range\r\n";
+            information += migrants.getMigrantAgeRange() + "\r\n";
+            information += "Migrant Visa Stream\r\n";
+            information += migrants.getMigrantStream();
             return information;
         }
     }

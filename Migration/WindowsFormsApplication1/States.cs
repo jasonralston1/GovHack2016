@@ -24,9 +24,7 @@ namespace WindowsFormsApplication1
                 State newstate = new State(currentState);
                 newstate.addMigrant(localGovernmentArea, mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
                 stateList.Add(newstate);
-               
-            }
-            
+            } 
         }
         private Boolean stateExists(String currentState, String localGovernmentArea, String mainLanguage, String englishProficient, String countryOfBirth, String gender, String migrationStream, String ageBand)
         {
@@ -40,15 +38,7 @@ namespace WindowsFormsApplication1
             }
             return false;
         }
-        public void toString()
-        {
-            Console.WriteLine("States:");
-            foreach (State state in stateList)
-            {
-                state.toString();
-            }
-            Console.WriteLine();
-        }
+       
        public List<String> getStates()
         {
             List<String> states = new List<String>();
@@ -75,8 +65,7 @@ namespace WindowsFormsApplication1
                     return state.getRegionsForState();
                 }
             }
-            return new List<string>();
-                
+            return new List<string>();   
         }
 
         public String getRegionDetails(String stateName, String region)
@@ -89,7 +78,6 @@ namespace WindowsFormsApplication1
                 }
             }
             return "State not found";
-
         }
     }
 

@@ -11,6 +11,9 @@ using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Timers;
 
 namespace WindowsFormsApplication1
 {
@@ -18,47 +21,13 @@ namespace WindowsFormsApplication1
     {
         private DataPort dataport;
         GMapOverlay markersOverlay;
+        Boolean processed = false;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dataport = new DataPort();
-            
-            
-            stateDropdown.Show();
-            stateDropdown.Enabled = false;
-            regionDropdown.Show();
-            regionDropdown.Text = "Select Region";
-            stateDropdown.Text = "Select State";
-            regionDropdown.Enabled = false;
-            List<String> states = dataport.getStates();
-            foreach (String state in states)
-            {
-
-                stateDropdown.Items.Add(state);
-            }
-
-            
-            dataport.markLocations(markersOverlay, gmap);
-            stateDropdown.Enabled = true;
-            
-            gmap.SetPositionByKeywords("New South Wales, Australia");
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            dataport.getResults();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
-            
-        }
+     
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -73,41 +42,61 @@ namespace WindowsFormsApplication1
                 regionDropdown.Items.Add(region);
             }
             regionDropdown.Enabled = true;
+            
         }
 
-        private void gMapControl1_Load(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+            
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            //gmap.SetCurrentPositionByKeywords("New South, Mozambique");
-            gmap.SetPositionByKeywords("New South Wales, Australia");
-            
+            gmap.SetPositionByKeywords("Australia");
             markersOverlay = new GMapOverlay("markers");
-
-           
-            
-
-            
-         
-            stateDropdown.Hide();
-            regionDropdown.Hide();
-
+            status.Text = "Status: Loading Data...";
+            stateDropdown.Enabled = false;
+            regionDropdown.Enabled = false;
         }
-
-        private void gmap_Load(object sender, EventArgs e)
+        private void processData()
         {
 
-        }
+            status.Text = "Status: Processing Data...";
+            status.Update();
+            if (!processed)
+            {
+                dataport = new DataPort();
+                
+                regionDropdown.Show();
+                regionDropdown.Text = "Select Region";
+                stateDropdown.Text = "Select State";
+                regionDropdown.Enabled = false;
+                List<String> states = dataport.getStates();
+                foreach (String state in states)
+                {
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
+                    stateDropdown.Items.Add(state);
+                }
+
+                status.Text = "Status: Updating Map...";
+                status.Update();
+                gmap.Hide();
+
+                dataport.markLocations(markersOverlay, gmap);
+
+                gmap.SetPositionByKeywords("Australia");
+                gmap.Show();
+                stateDropdown.Enabled = true;
+
+                processed = true;
+                furtherInfo.Text = "Select a region to view further information here.";
+
+                status.Text = "Status: Processing Complete";
+            }
+            else
+            {
+                MessageBox.Show("Data already processed");
+            }
         }
 
         private void regionDropdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,15 +106,42 @@ namespace WindowsFormsApplication1
             furtherInfo.Text = dataport.getRegionDetails(stateDropdown.Text, regionDropdown.Text);
         }
 
-        private void gmap_OnMapDrag()
-        {
-
-        }
-
         private void gmap_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             furtherInfo.Clear();
-            furtherInfo.Text = item.ToolTipText;
+            
+            String locationText = item.ToolTipText;
+
+            using (StringReader reader = new StringReader(locationText))
+            {
+                string line;
+                line = reader.ReadLine();
+                string[] words = Regex.Split(line, ": ");
+                String state = words[1];
+                Console.WriteLine("State: " + state);
+                line = reader.ReadLine();
+                
+                string[] words2 = Regex.Split(line, ": ");
+                String region = words2[1];
+                Console.WriteLine("Region: " + region);
+
+                furtherInfo.Text = dataport.getRegionDetails(state, region);
+
+            }
+          
+    }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            timer1.Interval = 2000;
+            timer1.Start();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            processData();
+        }
+
     }
 }

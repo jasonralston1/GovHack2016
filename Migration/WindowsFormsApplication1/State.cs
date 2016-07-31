@@ -21,17 +21,11 @@ namespace WindowsFormsApplication1
         }
         public Boolean nameMatches(String statename)
         {
-        
             return name.Equals(statename);
         }
         public void addMigrant(String localGovernmentArea, String mainLanguage, String englishProficient, String countryOfBirth, String gender, String migrationStream, String ageBand)
         {
             regions.addMigrantData(localGovernmentArea, mainLanguage, englishProficient, countryOfBirth, gender, migrationStream, ageBand);
-        }
-        public void toString()
-        {
-            Console.WriteLine(name);
-            regions.toString();
         }
         public String getName()
         {
